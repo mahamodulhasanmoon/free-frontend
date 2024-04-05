@@ -2,6 +2,8 @@
 export default function OverviewCard({title,value}:any) {
   return (
     <>
+
+    
          <div className="col-sm-6 col-xl-3">
     <div className="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
       <i className="fa fa-chart-line fa-3x text-primary" />
