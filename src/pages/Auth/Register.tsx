@@ -12,7 +12,7 @@ export default function Register() {
         toast.success((response as any).message)
         navigate('/login')
       } catch (error) {
-        console.log((error as any).message)
+        toast.error((error as any).message)
       }
   
   
