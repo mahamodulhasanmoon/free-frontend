@@ -45,7 +45,7 @@ export default function useInformation(acceptedRoutes?: any) {
     };
 
     fetchData();
-  }, [user,page, isRefresh,setPage]);
+  }, [user,page, isRefresh,setPage,acceptedRoutes,pathname,role]);
 
   const userId = user?.id;
   useEffect(() => {
@@ -75,6 +75,7 @@ export default function useInformation(acceptedRoutes?: any) {
             return [...state, data];
         }
       });
+      setIsRefresh(Math.random())
 
     })
 
