@@ -1,21 +1,10 @@
 
-import { useEffect, useState } from "react";
 import OverviewCard from "../../../components/Cards/OverviewCard";
-import { getData } from "../../../api/fetching";
+import useInformation from "../../../hooks/useInformation";
 
 
 export default function Overview() {
-const [analytics,setAnalytics] = useState<any>(null)
-
-useEffect(()=>{
-
-  const fetchData = async()=>{
-
-    const data = await getData('/analytics')
-    setAnalytics(data)
-  }
-fetchData()
-},[])
+  const {analytics} = useInformation()
 
 
   return (

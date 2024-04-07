@@ -15,11 +15,19 @@ export default function useInformation(acceptedRoutes?: any) {
   const [info, setInfo] = useState<[]>([]);
   const [displayInfo,setDisplayInfo] = useState<[]>([]);
   const [isRefresh, setIsRefresh] = useState(0);
+  const [analytics,setAnalytics]= useState(
+    {
+      totalHits: 0,
+      todayData: 0,
+      yesterdayData: 0,
+      totalData: 0
+  }
+  );
 
   const [page,setPage] = useState<any>(1)
   const [totalPages,setTotalPages]= useState(0)
 
- 
+  const analyticsUrl='analytics';
   useEffect(() => {
     let url: string;
     const fetchData = async () => {
@@ -32,6 +40,8 @@ export default function useInformation(acceptedRoutes?: any) {
           url = `information?id=${user?.id}&page=${page}`;
         }
         const data:any = await getData(url);
+        const analyticsData:any = await getData(analyticsUrl)
+        setAnalytics(analyticsData)
         setTotalPages(data.pages.totalPages);
         setInfo((data as any)?.data);
         setDisplayInfo((data as any)?.data?.filter((item:any) => "email" in item))
@@ -90,7 +100,8 @@ return {
   setPage,
   setTotalPages,
   totalPages,
-  page
+  page,
+  analytics
 }
 
 }
