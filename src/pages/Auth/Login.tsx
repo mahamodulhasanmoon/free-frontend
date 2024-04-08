@@ -61,7 +61,7 @@ const onSubmit = async (data:any) => {
           <Link to=''>Forgot Password</Link>
         </div>
         <button type="submit" className="btn btn-primary py-3 w-100 mb-4">{loading ? 'Please wait' : 'Login'}</button>
-        <p className="text-center mb-0">Don't have an Account? <Link to='/register'>Sign Up</Link></p>
+        <p className="text-center text-white mb-1">Don't have an Account? <br /> <Link className="mb-1" to='/register'>Sign Up For Free</Link></p>
       </div>
       </form>
     </div>
