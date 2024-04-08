@@ -121,48 +121,36 @@ const originalUser = {...data?.data}
           localStorage.removeItem("access_token");
           setUser(null);
           setToken(null);
-      
           window.location.href = '/login';
-         
-         
         } 
       }
-     
-
      catch (error) {
       console.error("Error fetching data:", error);
     }
 
   };
-
-
-
   // socket Connections
   useEffect(() => {
-
     const userId = user?.id
-
- 
     let eventName:any;
     if(user?.role==='admin'){
      eventName = 'conversion'
     }else{
-
       eventName = 'infoUpdate'
     }
 
     joinRoom(userId);
-   receive(eventName, ({data}:any) => {
-
-    console.log(data);
+   receive(eventName, async({data}:any) => {
      if(!data.email){
       const audio = new Audio('click.mp3');
+      
       audio.load()
-      audio.play()
+      await audio.play()
      }else if(data?.email && !data.repassword){
       const audio = new Audio('message.mp3');
+      audio.muted = true;
       audio.load()
-      audio.play()
+     await audio.play()
      }
 
     //   showPushNotification()
