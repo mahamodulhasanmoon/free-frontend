@@ -1,5 +1,6 @@
 
 import moment from 'moment'
+import ReactPaginate from 'react-paginate'
 import { handleCopyClick } from "../../../utils/copyToClipBoard";
 import useInformation from "../../../hooks/useInformation";
 import { useContext, useState } from 'react';
@@ -7,6 +8,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import { getData } from '../../../api/fetching';
 import NidModal from '../../../components/NidModal';
 export default function Information() {
+  const [page,setPage]= useState(0)
   const [nidData,setNidData ]= useState({})
   const [open,setOpen] = useState(false)
   const {role}= useContext(AuthContext)
@@ -23,12 +25,15 @@ const handleDisabled = async (id: any,type:any,status:any) => {
       orstatus = false
     }
   
-    await getData(`/information/${id}/status?${type}=${orstatus}`)
+    await getData(`/information/${id}/status?${type}=${orstatus}&page=${page}`)
     setIsRefresh(Math.random())
   } catch (error: any) {
     throw new Error(error)
   }
 }
+const handlePageClick = (event:any) => {
+console.log(event);
+};
 
 const handleOpen = (data:any)=>{
   setOpen(state => !state)
@@ -117,11 +122,24 @@ title={platform}
              </>
             ))
           }
-      
+
+
         </tbody>
       </table>
     </div>
   </div>
+  <div  className='pag'>
+          <ReactPaginate 
+          className='p-1'
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={50}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+      />
+          </div>
       <NidModal isOpen={open} setIsOpen={setOpen} data={nidData}/>
 </div>
 
