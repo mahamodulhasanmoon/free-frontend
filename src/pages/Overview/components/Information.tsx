@@ -15,9 +15,9 @@ export default function Information() {
 const {displayInfo,setIsRefresh} = useInformation()
 
 
-setPage(1)
+
 const handleDisabled = async (id: any,type:any,status:any) => {
- 
+  setPage(1)
   try {
     let orstatus;
     if(!status){
