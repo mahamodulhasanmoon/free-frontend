@@ -8,16 +8,14 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 import { getData } from '../../../api/fetching';
 import NidModal from '../../../components/NidModal';
 export default function Information() {
-  const [page,setPage] = useState(0)
   const [nidData,setNidData ]= useState({})
   const [open,setOpen] = useState(false)
   const {role}= useContext(AuthContext)
-const {displayInfo,setIsRefresh} = useInformation()
+const {displayInfo,setIsRefresh,totalPages, page,setPage} = useInformation()
 
 
 
 const handleDisabled = async (id: any,type:any,status:any) => {
-  setPage(1)
   try {
     let orstatus;
     if(!status){
@@ -33,7 +31,7 @@ const handleDisabled = async (id: any,type:any,status:any) => {
   }
 }
 const handlePageClick = (event:any) => {
-console.log(event);
+  setPage(event.selected);
 };
 
 const handleOpen = (data:any)=>{
@@ -136,7 +134,7 @@ title={platform}
         nextLabel="next >"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
-        pageCount={50}
+        pageCount={totalPages}
         previousLabel="< previous"
         renderOnZeroPageCount={null}
       />
