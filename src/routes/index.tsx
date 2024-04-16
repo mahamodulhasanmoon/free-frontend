@@ -7,6 +7,7 @@ import Login from "../pages/Auth/Login.tsx";
 import Register from "../pages/Auth/Register.tsx";
 import Users from "../pages/admin/Users";
 import PrivateRoutes from "./PrivateRoutes.tsx";
+import Support from "../pages/Overview/components/Support.tsx";
 
 export const routes = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ export const routes = createBrowserRouter([
             {
                 path: '/create-user',
                 element:<Register/>
+            },
+            {
+                path: '/support',
+                element:<Support/>
             }
         ]
     },

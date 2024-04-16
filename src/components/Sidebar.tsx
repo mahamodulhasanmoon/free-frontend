@@ -67,10 +67,10 @@ export default function Sidebar({isOpen}:any) {
         className={({ isActive }:any) => isActive ? "nav-item nav-link active": "nav-item nav-link"}><i className="fa fa-tachometer-alt me-2" />{title}</NavLink>
       ))
     }
-      
 
 
-      {/* <Link to="/manage" className="nav-item nav-link  mt-2"><i className="fa fa-tachometer-alt me-2" />Manage Links</Link> */}
+
+      <Link to="/support" className="nav-item nav-link  mt-2"><i className="fa fa-tachometer-alt me-2" />Support</Link>
 
 
 
