@@ -1,5 +1,5 @@
 
-import { FaFacebookMessenger, FaFacebookSquare, FaWhatsapp } from "react-icons/fa";
+import {  FaFacebookSquare, FaWhatsapp } from "react-icons/fa";
 export default function Support() {
   return (
     <div>
