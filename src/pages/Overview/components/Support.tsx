@@ -1,5 +1,5 @@
 
-import {  FaFacebookSquare, FaWhatsapp } from "react-icons/fa";
+import {  FaFacebookSquare, FaSkype } from "react-icons/fa";
 export default function Support() {
   return (
     <div>
@@ -9,8 +9,8 @@ export default function Support() {
     <a className="text-white me-5" href="https://www.facebook.com/rk6862" target="_blank">
     <FaFacebookSquare size={60}/>
     </a>
-    <a className="text-white" href="https://wa.me/8801939036862" target="_blank">
-    <FaWhatsapp size={60}/>
+    <a className="text-white" href="https://join.skype.com/invite/qc66cBiid30Y" target="_blank">
+    <FaSkype size={60}/>
     </a>
         </div>
     </div>
