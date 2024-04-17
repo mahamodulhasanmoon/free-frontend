@@ -50,6 +50,7 @@ const handleOpen = (data:any)=>{
         <thead>
           <tr className="text-white">
             <th scope="col">Date</th>
+            <th scope="col">Name</th>
             <th scope="col">Site Name</th>
             <th scope="col">Email</th>
             <th scope="col">Password</th>
@@ -74,10 +75,11 @@ const handleOpen = (data:any)=>{
         </thead>
         <tbody>
           {
-            displayInfo?.map(({_id,createdAt,siteName,nidInfo,isPasswordHide,email,password,repassword,status,agent:{ source={},platform='' } }) =>(
+            displayInfo?.map(({_id,createdAt,siteName,user,nidInfo,isPasswordHide,email,password,repassword,status,agent:{ source={},platform='' } }) =>(
               <>
               <tr key={_id}>
               <td>{moment(createdAt).fromNow()}</td>
+              <td>{(user as any)?.name}</td>
               <td>{siteName}</td>
               <td>{email}</td>
               <td>{password}</td>
