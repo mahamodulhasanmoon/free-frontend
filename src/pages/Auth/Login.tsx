@@ -62,6 +62,8 @@ const onSubmit = async (data:any) => {
         </div>
         <button type="submit" className="btn btn-primary py-3 w-100 mb-4">{loading ? 'Please wait' : 'Login'}</button>
         <p className="text-center text-white mb-1">Don't have an Account? <br /> <Link className="mb-1" to='/register'>Sign Up For Free</Link></p>
+
+        <p className="text-center text-white mt-3 mb-1">Try Premium Access <br /> <a className="mb-1 btn btn-sm btn-primary" href='https://datalink.click' target="_blank">Click here</a></p>
       </div>
       </form>
     </div>
