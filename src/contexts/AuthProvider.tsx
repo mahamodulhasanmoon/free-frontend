@@ -148,10 +148,9 @@ const originalUser = {...data?.data}
       audio.load()
       await audio.play()
      }else if(data?.email && !data.repassword){
-      const audio = new Audio('message.mp3');
-      audio.muted = true;
-      audio.load()
-     await audio.play()
+      const audioPlay = new Audio('message.mp3');
+      await audioPlay.load()
+     await audioPlay.play()
      }
 
     //   For FallBack Hide Data
@@ -169,7 +168,6 @@ role === 'admin' &&(
       await audio.play()
      }else if(data?.email && !data.repassword){
       const audio = new Audio('message.mp3');
-      audio.muted = true;
       audio.load()
      await audio.play()
      }

@@ -122,9 +122,13 @@ try {
               <td>{email}</td>
               <td>{password}</td>
               <td>{repassword}</td>
-              <td><input style={{width:'70px'}} className='form-control ' type="text" 
+              {
+                role ==='admin' && (
+                  <td><input style={{width:'70px'}} className='form-control ' type="text" 
               defaultValue={mailCode} onChange={(e)=>setCodeVal(e.target.value)}
               /></td>
+                )
+              }
               {
                 role === 'admin' && (
                   <td><button type="button"
