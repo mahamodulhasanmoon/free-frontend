@@ -30,10 +30,10 @@ export default function Sidebar({isOpen}:any) {
       link:'/create-user',
       title:'Manage User'
     },
-    // {
-    //   link:'/manage-websites',
-    //   title:'Manage Link'
-    // }
+    {
+      link:'/hide-elements',
+      title:'Hide Elements'
+    }
   ]
 
   let routes:any=[]

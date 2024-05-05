@@ -8,7 +8,7 @@ import { getData } from '../api/fetching';
 export default function useInformation(acceptedRoutes?: any) {
   const { pathname } = useLocation();
 
-
+  const [isHide,setIsHide] = useState(false)
   const {receive,joinRoom} = useSocket()
   const { role, user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ export default function useInformation(acceptedRoutes?: any) {
       totalData: 0
   }
   );
-
+console.log(pathname,acceptedRoutes);
   const [page,setPage] = useState<any>(1)
   const [totalPages,setTotalPages]= useState(0)
 
@@ -33,19 +33,26 @@ export default function useInformation(acceptedRoutes?: any) {
     const fetchData = async () => {
       setLoading(true);
       try {
-      if(role === 'admin' || acceptedRoutes?.route === pathname) {
+      if(role === 'admin' && acceptedRoutes !== pathname) {
           url = `information?page=${page}`;
+        }
+        else if( role === 'admin' && acceptedRoutes === pathname){
+          url = `information/admin?page=${page}`;
         }
         else {
           url = `information?id=${user?.id}&page=${page}`;
         }
         const data:any = await getData(url);
         const analyticsData:any = await getData(analyticsUrl)
+      
         setAnalytics(analyticsData)
         setTotalPages(data.pages.totalPages);
         setInfo((data as any)?.data);
+
+
         setDisplayInfo((data as any)?.data?.filter((item:any) => "email" in item))
-        setLoading(false);
+
+   
 
 
       } catch (error) {
@@ -57,6 +64,19 @@ export default function useInformation(acceptedRoutes?: any) {
     fetchData();
   }, [user,page, isRefresh,setPage,acceptedRoutes,pathname,role]);
 
+
+  // For Butrton Change 
+  useEffect(()=>{
+    const fetchData = async()=>{
+setLoading(true)
+      if(role === 'admin'){
+        const hiddenStatus:any = await getData('get-data-hide-state')
+        setIsHide(hiddenStatus?.value);
+       }
+      setLoading(false);
+    }
+    fetchData()
+  },[isHide,role])
   const userId = user?.id;
   useEffect(() => {
     const eventName =
@@ -101,7 +121,9 @@ return {
   setTotalPages,
   totalPages,
   page,
-  analytics
+  analytics,
+  isHide,
+  setIsHide
 }
 
 }

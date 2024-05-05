@@ -12,6 +12,7 @@ const PrivateRoutes = ({ children }:any) => {
   const { pathname } = useLocation();
   
 
+  
 
   if (loading) {
     return <>
