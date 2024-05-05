@@ -36,7 +36,7 @@ export default function TableData({data,setNidData,setOpen}:any) {
   }
 
   const handleOpen = (data:any)=>{
-    setOpen(state => !state)
+    setOpen((state:boolean) => !state)
     setNidData(data)
   }
 

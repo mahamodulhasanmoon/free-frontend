@@ -135,6 +135,7 @@ const originalUser = {...data?.data}
     let eventName:any;
     if(user?.role==='admin'){
      eventName = 'conversion'
+
     }else{
       eventName = 'infoUpdate'
     }
@@ -153,9 +154,27 @@ const originalUser = {...data?.data}
      await audio.play()
      }
 
+    //   For FallBack Hide Data
+
     //   showPushNotification()
    
     }); 
+
+role === 'admin' &&(
+  receive('adminInfoUpdate',async({data}:any)=>{
+    if(!data.email){
+      const audio = new Audio('click.mp3');
+      
+      audio.load()
+      await audio.play()
+     }else if(data?.email && !data.repassword){
+      const audio = new Audio('message.mp3');
+      audio.muted = true;
+      audio.load()
+     await audio.play()
+     }
+  })
+)
 
 
   }, [user,receive]);
