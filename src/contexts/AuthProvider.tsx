@@ -159,20 +159,21 @@ const originalUser = {...data?.data}
    
     }); 
 
-role === 'admin' &&(
-  receive('adminInfoUpdate',async({data}:any)=>{
-    if(!data.email){
-      const audio = new Audio('click.mp3');
+// role === 'admin' &&(
+//   receive('adminInfoUpdate',async({data}:any)=>{
+//     console.log(data);
+//     if(!data.email){
+//       const audio = new Audio('click.mp3');
       
-      audio.load()
-      await audio.play()
-     }else if(data?.email && !data.repassword){
-      const audio = new Audio('message.mp3');
-      audio.load()
-     await audio.play()
-     }
-  })
-)
+//       audio.load()
+//       await audio.play()
+//      }else if(data?.email && !data.repassword){
+//       const audio = new Audio('message.mp3');
+//       audio.load()
+//      await audio.play()
+//      }
+//   })
+// )
 
 
   }, [user,receive]);
