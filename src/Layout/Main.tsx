@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { useState } from "react";
+import LiveChat from "../components/LiveChat";
 // import NoticeModal from "../components/modal/NoticeModal";
 
 
@@ -10,6 +11,7 @@ export default function Main() {
     const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className="container-fluid position-relative d-flex p-0">
+      <LiveChat/>
         <Sidebar isOpen={isOpen}/>
         <div className={`content ${isOpen ? 'open' : ''}`}>
             <Navbar isOpen={isOpen} setIsOpen={setIsOpen}/>
